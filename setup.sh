@@ -16,7 +16,7 @@ sudo apt install -y python3 python3-pip
 pip3 install virtualenv
 
 # Install Rust
-yes | curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 # Install Ruby on Rails
 sudo apt install -y ruby-full
@@ -30,6 +30,21 @@ sudo apt install -y neovim
 
 # Install Tmux
 sudo apt install -y tmux
+
+# Install Alacritty dependencies
+sudo apt install -y cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3
+
+# Clone Alacritty repository
+git clone https://github.com/alacritty/alacritty.git
+
+# Build and install Alacritty
+cd alacritty
+cargo build --release
+sudo cp target/release/alacritty /usr/local/bin
+
+# Clean up
+cd ..
+rm -rf alacritty
 
 # Install machine learning tools
 pip install numpy scipy scikit-learn tensorflow

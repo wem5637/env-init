@@ -24,10 +24,12 @@ sudo apt install -y curl
 sudo apt install -y expect
 
 # Automate Rustup installation using expect
-echo "spawn curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh"
-echo "expect \"1) Proceed with installation (default)\""
-echo "send -- \"\\r\""
-echo "expect eof" | expect
+expect -c '
+spawn curl --proto "=https" --tlsv1.2 -sSf https://sh.rustup.rs | sh
+expect "1) Proceed with installation (default)"
+send "\r"
+expect eof
+'
 
 
 # Install Ruby on Rails
@@ -44,7 +46,7 @@ sudo add-apt-repository ppa:neovim-ppa/unstable
 sudo apt update
 
 # Install Neovim
-sudo apt install -y neovim=0.X.X
+sudo apt install -y neovim
 
 # Install Neovim dependencies
 sudo apt install -y python3 python3-pip

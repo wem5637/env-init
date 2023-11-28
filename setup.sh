@@ -123,8 +123,8 @@ nnoremap <leader>n :NERDTreeFocus<CR>
 
 let mapleader = ","
 let g:neoformat_try_node_exe = 1
-let g:airline#extensions#clock#format = '%l:%M%p'
-let g:rooter_patterns = ['.git', 'package.json']
+let g:airline#extensions#clock#format = "%l:%M%p"
+let g:rooter_patterns = [".git", "package.json"]
 set number
 set expandtab
 set shiftwidth=2

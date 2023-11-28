@@ -39,19 +39,14 @@ sudo apt install -y npm
 DEBIAN_FRONTEND=noninteractive yes | sudo add-apt-repository ppa:neovim-ppa/unstable
 DEBIAN_FRONTEND=noninteractive yes | sudo apt update
 
-echo "TEST1"
 # Install Neovim
 sudo apt install -y neovim
-echo "TEST2"
 
 # Install Neovim dependencies
 sudo apt install -y python3 python3-pip
-echo "TEST3"
 
 # Install Python support for Neovim
 pip3 install -y neovim
-echo "TEST4"
-
 
 # Install Tmux
 sudo apt install -y tmux
@@ -73,6 +68,15 @@ rm -rf alacritty
 
 # Install machine learning tools
 pip install numpy scipy scikit-learn tensorflow
+# Set up an ml virtual environment
+virtualenv venv_ml
+source venv_ml/bin/activate
+
+# Install machine learning tools
+pip install numpy scipy scikit-learn tensorflow
+
+# Deactivate the virtual environment
+deactivate
 
 # Add the F, P, FS, and machine learning virtual environment functions to .bashrc
 echo '
@@ -97,16 +101,6 @@ P() {
     break
   done
 }
-
-# Set up an ml virtual environment
-virtualenv venv_ml
-source venv_ml/bin/activate
-
-# Install machine learning tools
-pip install numpy scipy scikit-learn tensorflow
-
-# Deactivate the virtual environment
-deactivate
 ' >> ~/.bashrc
 
 # Load the updated .bashrc

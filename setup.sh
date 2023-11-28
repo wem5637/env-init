@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/expect
 
 # Update package list
 sudo apt update

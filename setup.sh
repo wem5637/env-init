@@ -26,136 +26,136 @@ sudo apt install -y expect
 chmod +x ./rustup.exp
 ./rustup.exp
 
-# # Install Ruby on Rails
-# sudo apt install -y ruby-full
-# gem install rails
+# Install Ruby on Rails
+sudo apt install -y ruby-full
+gem install rails
 
-# # Install npm and Node.js
-# sudo apt install -y npm
-
-
-# # Install Neovim
-# # Add the Neovim repository and update the package list
-# sudo add-apt-repository ppa:neovim-ppa/unstable
-# sudo apt update
-
-# # Install Neovim
-# sudo apt install -y neovim
-
-# # Install Neovim dependencies
-# sudo apt install -y python3 python3-pip
-
-# # Install Python support for Neovim
-# pip3 install neovim
+# Install npm and Node.js
+sudo apt install -y npm
 
 
-# # Install Tmux
-# sudo apt install -y tmux
+# Install Neovim
+# Add the Neovim repository and update the package list
+sudo add-apt-repository ppa:neovim-ppa/unstable
+sudo apt update
 
-# # Install Alacritty dependencies
-# sudo apt install -y cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3
+# Install Neovim
+sudo apt install -y neovim
 
-# # Clone Alacritty repository
-# git clone https://github.com/alacritty/alacritty.git
+# Install Neovim dependencies
+sudo apt install -y python3 python3-pip
 
-# # Build and install Alacritty
-# cd alacritty
-# cargo build --release
-# sudo cp target/release/alacritty /usr/local/bin
+# Install Python support for Neovim
+pip3 install neovim
 
-# # Clean up
-# cd ..
-# rm -rf alacritty
 
-# # Install machine learning tools
-# pip install numpy scipy scikit-learn tensorflow
+# Install Tmux
+sudo apt install -y tmux
 
-# # Add the F, P, FS, and machine learning virtual environment functions to .bashrc
-# echo '
-# # Function to grep case-insensitively through Git-tracked files
-# F() {
-#   grep "$1" -iR "$(git ls-files)"
-# }
+# Install Alacritty dependencies
+sudo apt install -y cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev python3
 
-# # Function to grep case-sensitively through Git-tracked files
-# FS() {
-#   grep "$1" -R "$(git ls-files)"
-# }
+# Clone Alacritty repository
+git clone https://github.com/alacritty/alacritty.git
 
-# # Function to select and open a file from Git-tracked files matching a pattern
-# P() {
-#   list=$(git ls-files | grep "$1" -i)
-#   a=("${(f)list}")
+# Build and install Alacritty
+cd alacritty
+cargo build --release
+sudo cp target/release/alacritty /usr/local/bin
 
-#   select item in $a; do
-#     echo "Opening file: $item"
-#     nvim $item # Assuming you want to use Neovim to open the file
-#     break
-#   done
-# }
+# Clean up
+cd ..
+rm -rf alacritty
 
-# # Set up an ml virtual environment
-# virtualenv venv_ml
-# source venv_ml/bin/activate
+# Install machine learning tools
+pip install numpy scipy scikit-learn tensorflow
 
-# # Install machine learning tools
-# pip install numpy scipy scikit-learn tensorflow
+# Add the F, P, FS, and machine learning virtual environment functions to .bashrc
+echo '
+# Function to grep case-insensitively through Git-tracked files
+F() {
+  grep "$1" -iR "$(git ls-files)"
+}
 
-# # Deactivate the virtual environment
-# deactivate
-# ' >> ~/.bashrc
+# Function to grep case-sensitively through Git-tracked files
+FS() {
+  grep "$1" -R "$(git ls-files)"
+}
 
-# # Load the updated .bashrc
-# source ~/.bashrc
+# Function to select and open a file from Git-tracked files matching a pattern
+P() {
+  list=$(git ls-files | grep "$1" -i)
+  a=("${(f)list}")
 
-# # Install NeoVim plugins using Packer.nvim
-# git clone https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+  select item in $a; do
+    echo "Opening file: $item"
+    nvim $item # Assuming you want to use Neovim to open the file
+    break
+  done
+}
 
-# # Create a basic init.vim configuration for NeoVim
-# mkdir -p ~/.config/nvim
-# echo '
-# lua << EOF
-# -- Use Packer.nvim for plugin management
-# vim.cmd([[packadd packer.nvim]])
+# Set up an ml virtual environment
+virtualenv venv_ml
+source venv_ml/bin/activate
 
-# require("packer").startup(function()
-#   -- Packer can manage itself
-#   use("wbthomason/packer.nvim")
+# Install machine learning tools
+pip install numpy scipy scikit-learn tensorflow
 
-#   -- startup customization
-#   use {
-#   "startup-nvim/startup.nvim",
-#     requires = {"nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim"},
-#     config = function()
-#       require"startup".setup()
-#     end
-#   }
+# Deactivate the virtual environment
+deactivate
+' >> ~/.bashrc
 
-#   -- Telescope for fuzzy finding
-#   use("nvim-telescope/telescope.nvim")
+# Load the updated .bashrc
+source ~/.bashrc
 
-#   -- Tree-sitter for improved syntax highlighting
-#   use({
-#     "nvim-treesitter/nvim-treesitter",
-#     run = ":TSUpdate",
-#   })
+# Install NeoVim plugins using Packer.nvim
+git clone https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
-#   -- Language servers (LSP)
-#   use("neovim/nvim-lspconfig")
-#   use("kabouzeid/nvim-lspinstall")
+# Create a basic init.vim configuration for NeoVim
+mkdir -p ~/.config/nvim
+echo '
+lua << EOF
+-- Use Packer.nvim for plugin management
+vim.cmd([[packadd packer.nvim]])
 
-#   -- Additional LSP-related plugins
-#   use("glepnir/lspsaga.nvim")
-#   use("hrsh7th/nvim-compe")
+require("packer").startup(function()
+  -- Packer can manage itself
+  use("wbthomason/packer.nvim")
 
-#   -- Status line and bufferline
-#   use("hoob3rt/lualine.nvim")
-#   use("akinsho/bufferline.nvim")
-# end)
-# EOF
-# ' > ~/.config/nvim/init.vim
+  -- startup customization
+  use {
+  "startup-nvim/startup.nvim",
+    requires = {"nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim"},
+    config = function()
+      require"startup".setup()
+    end
+  }
 
-# # Install plugins using Packer.nvim
-# nvim --headless +PackerInstall +qall
+  -- Telescope for fuzzy finding
+  use("nvim-telescope/telescope.nvim")
+
+  -- Tree-sitter for improved syntax highlighting
+  use({
+    "nvim-treesitter/nvim-treesitter",
+    run = ":TSUpdate",
+  })
+
+  -- Language servers (LSP)
+  use("neovim/nvim-lspconfig")
+  use("kabouzeid/nvim-lspinstall")
+
+  -- Additional LSP-related plugins
+  use("glepnir/lspsaga.nvim")
+  use("hrsh7th/nvim-compe")
+
+  -- Status line and bufferline
+  use("hoob3rt/lualine.nvim")
+  use("akinsho/bufferline.nvim")
+end)
+EOF
+' > ~/.config/nvim/init.vim
+
+# Install plugins using Packer.nvim
+nvim --headless +PackerInstall +qall
 
 echo "Development environment setup complete!"

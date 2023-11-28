@@ -114,12 +114,9 @@ git clone https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pac
 # Create a basic init.vim configuration for NeoVim
 mkdir -p ~/.config/nvim
 echo '
-lua << EOF
-
 autocmd VimEnter * wincmd p
 autocmd BufWritePre *.tsx,*.ts Prettier
 
-"nerdtree
 autocmd VimEnter * NERDTree
 let NERDTreeShowHidden=1
 nnoremap <leader>n :NERDTreeFocus<CR>
@@ -160,6 +157,7 @@ nnoremap <leader>cwp :let @+ = expand("%:p")
 """""""""""""""""""""""""""""""""""""""""""""""""
 syntax on
 
+lua << EOF
 
 -- Use Packer.nvim for plugin management
 vim.cmd([[packadd packer.nvim]])

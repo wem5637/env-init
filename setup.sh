@@ -36,12 +36,12 @@ sudo apt install -y npm
 
 # Install Neovim
 # Add the Neovim repository and update the package list
-sudo add-apt-repository ppa:neovim-ppa/unstable
-sudo apt update
+DEBIAN_FRONTEND=noninteractive yes | sudo add-apt-repository ppa:neovim-ppa/unstable
+DEBIAN_FRONTEND=noninteractive yes | sudo apt update
 
 echo "TEST1"
 # Install Neovim
-DEBIAN_FRONTEND=noninteractive yes | sudo apt install -y neovim
+sudo apt install -y neovim
 echo "TEST2"
 
 # Install Neovim dependencies

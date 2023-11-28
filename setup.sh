@@ -23,10 +23,18 @@ sudo apt install -y curl
 # Install expect
 sudo apt install -y expect
 
-# Automate Rustup installation using expect
+# Use expect to automate Rustup installation
 expect -c '
 spawn curl --proto "=https" --tlsv1.2 -sSf https://sh.rustup.rs | sh
 expect -ex "Proceed with installation"
+
+# Check the exit status of the previous expect command
+if [ $? -ne 0 ]; then
+    # Expectation failed, log an error and exit
+    send_user "Error: Failed to match the expected substring\n"
+    exit 1
+fi
+
 send "\r"
 expect eof
 '

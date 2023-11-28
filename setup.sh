@@ -26,6 +26,8 @@ sudo apt install -y expect
 chmod +x ./rustup.exp
 ./rustup.exp
 
+source "$HOME/.cargo/env"
+
 # Install Ruby on Rails
 sudo apt install -y ruby-full
 gem install rails

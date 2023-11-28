@@ -156,6 +156,7 @@ nnoremap <leader>cwp :let @+ = expand("%:p")
 " Color Settings
 """""""""""""""""""""""""""""""""""""""""""""""""
 syntax on
+colorscheme monokai
 
 lua << EOF
 

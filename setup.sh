@@ -19,7 +19,7 @@ pip3 install virtualenv
 sudo apt install -y curl
 
 # Install Rust
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+yes | curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
 # Install Ruby on Rails
 sudo apt install -y ruby-full

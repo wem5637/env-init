@@ -30,8 +30,8 @@ chmod +x ./rustup.exp
 sudo apt install -y ruby-full
 gem install rails
 
-# Install npm and Node.js
-sudo apt install -y npm
+# Install nvm
+curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
 
 
 # Install Neovim

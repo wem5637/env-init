@@ -119,6 +119,16 @@ lua << EOF
 vim.cmd([[packadd packer.nvim]])
 
 require("packer").startup(function()
+
+  use 'preservim/nerdtree'
+  use 'prettier/vim-prettier'
+  use 'ibhagwan/fzf-lua'
+  use 'vim-airline/vim-airline'
+  use 'vim-airline/vim-airline-themes'
+  use 'enricobacis/vim-airline-clock'
+  use 'mg979/vim-visual-multi'
+  use 'tanvirtin/monokai.nvim'
+
   -- Packer can manage itself
   use("wbthomason/packer.nvim")
 
@@ -139,6 +149,8 @@ require("packer").startup(function()
     "nvim-treesitter/nvim-treesitter",
     run = ":TSUpdate",
   })
+  -- if fails, then run nvim-treesitter.install.update() manually
+
 
   -- Language servers (LSP)
   use("neovim/nvim-lspconfig")

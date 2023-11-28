@@ -19,7 +19,16 @@ pip3 install virtualenv
 sudo apt install -y curl
 
 # Install Rust
-yes | curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+
+# Install expect
+sudo apt install -y expect
+
+# Automate Rustup installation using expect
+echo "spawn curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh"
+echo "expect \"1) Proceed with installation (default)\""
+echo "send -- \"\\r\""
+echo "expect eof" | expect
+
 
 # Install Ruby on Rails
 sudo apt install -y ruby-full

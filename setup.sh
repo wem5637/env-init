@@ -40,13 +40,13 @@ sudo add-apt-repository ppa:neovim-ppa/unstable
 sudo apt update
 
 # Install Neovim
-sudo apt install -y neovim
+yes | sudo apt install -y neovim
 
 # Install Neovim dependencies
 sudo apt install -y python3 python3-pip
 
 # Install Python support for Neovim
-pip3 install neovim
+pip3 install -y neovim
 
 
 # Install Tmux

@@ -26,7 +26,7 @@ sudo apt install -y expect
 # Automate Rustup installation using expect
 expect -c '
 spawn curl --proto "=https" --tlsv1.2 -sSf https://sh.rustup.rs | sh
-expect "1) Proceed with installation (default)"
+expect -ex "Proceed with installation"
 send "\r"
 expect eof
 '

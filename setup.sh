@@ -25,24 +25,21 @@ gem install rails
 # Install npm and Node.js
 sudo apt install -y npm
 
+
 # Install Neovim
+# Add the Neovim repository and update the package list
+sudo add-apt-repository ppa:neovim-ppa/unstable
+sudo apt update
 
-# Install build dependencies
-sudo apt install -y ninja-build gettext libtool libtool-bin autoconf automake cmake g++ pkg-config unzip
+# Install Neovim
+sudo apt install -y neovim
 
-# Clone Neovim repository
-git clone https://github.com/neovim/neovim.git
+# Install Neovim dependencies
+sudo apt install -y python3 python3-pip
 
-# Switch to the Neovim repository directory
-cd neovim
+# Install Python support for Neovim
+pip3 install neovim
 
-# Build and install Neovim
-make CMAKE_BUILD_TYPE=RelWithDebInfo
-sudo make install
-
-# Clean up
-cd ..
-rm -rf neovim
 
 # Install Tmux
 sudo apt install -y tmux

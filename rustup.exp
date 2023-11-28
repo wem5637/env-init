@@ -4,11 +4,12 @@ spawn sh -c "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh"
 expect -ex "Proceed with installation"
 
 # Check the exit status of the previous expect command
-if [ $? -ne 0 ]; then
+set exit_status [wait]
+if {[lindex $exit_status 3] != 0} {
     # Expectation failed, log an error and exit
     send_user "Error: Failed to match the expected substring\n"
     exit 1
-fi
+}
 
 send "\r"
 expect eof

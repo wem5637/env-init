@@ -23,7 +23,7 @@ sudo apt install -y curl
 # Install expect
 sudo apt install -y expect
 
-./rustup.exp
+sh ./rustup.exp
 
 # # Install Ruby on Rails
 # sudo apt install -y ruby-full

@@ -1,4 +1,4 @@
-#!/usr/bin/expect
+#!/bin/bash
 
 # Update package list
 sudo apt update
@@ -23,20 +23,7 @@ sudo apt install -y curl
 # Install expect
 sudo apt install -y expect
 
-# Use expect to automate Rustup installation
-spawn sh -c "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh"
-expect -ex "Proceed with installation"
-
-# Check the exit status of the previous expect command
-if [ $? -ne 0 ]; then
-    # Expectation failed, log an error and exit
-    send_user "Error: Failed to match the expected substring\n"
-    exit 1
-fi
-
-send "\r"
-expect eof
-
+./rustup.exp
 
 # # Install Ruby on Rails
 # sudo apt install -y ruby-full

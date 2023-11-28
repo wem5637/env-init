@@ -1,15 +1,27 @@
 #!/usr/bin/expect -f
 
-spawn sh -c "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh"
-expect -ex "Proceed with installation"
+set timeout -1
 
-# Check the exit status of the previous expect command
-set exit_status [wait]
-if {[lindex $exit_status 3] != 0} {
-    # Expectation failed, log an error and exit
-    send_user "Error: Failed to match the expected substring\n"
-    exit 1
+# Spawn Rustup installation script
+spawn sh -c "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh"
+
+# Expect and respond to the "Proceed with installation" prompt
+expect {
+    "Proceed with installation*" {
+        send "1\r"
+        exp_continue
+    }
+    eof
 }
 
-send "\r"
+# Handle any additional prompts
+expect {
+    "Enter your choice*" {
+        send "\r"
+        exp_continue
+    }
+    eof
+}
+
+# Wait for completion
 expect eof

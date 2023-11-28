@@ -24,7 +24,6 @@ sudo apt install -y curl
 sudo apt install -y expect
 
 # Use expect to automate Rustup installation
-expect -c '
 spawn curl --proto "=https" --tlsv1.2 -sSf https://sh.rustup.rs | sh
 expect -ex "Proceed with installation"
 
@@ -37,7 +36,7 @@ fi
 
 send "\r"
 expect eof
-'
+
 
 # # Install Ruby on Rails
 # sudo apt install -y ruby-full

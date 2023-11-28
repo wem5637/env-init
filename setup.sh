@@ -39,14 +39,18 @@ sudo apt install -y npm
 sudo add-apt-repository ppa:neovim-ppa/unstable
 sudo apt update
 
+echo "TEST1"
 # Install Neovim
 DEBIAN_FRONTEND=noninteractive yes | sudo apt install -y neovim
+echo "TEST2"
 
 # Install Neovim dependencies
 sudo apt install -y python3 python3-pip
+echo "TEST3"
 
 # Install Python support for Neovim
 pip3 install -y neovim
+echo "TEST4"
 
 
 # Install Tmux

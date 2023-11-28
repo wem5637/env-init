@@ -40,7 +40,7 @@ sudo add-apt-repository ppa:neovim-ppa/unstable
 sudo apt update
 
 # Install Neovim
-yes | sudo apt install -y neovim
+DEBIAN_FRONTEND=noninteractive yes | sudo apt install -y neovim
 
 # Install Neovim dependencies
 sudo apt install -y python3 python3-pip

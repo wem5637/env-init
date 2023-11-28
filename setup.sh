@@ -15,6 +15,9 @@ sudo apt install -y python3 python3-pip
 # Install virtualenv for Python virtual environments
 pip3 install virtualenv
 
+# Install curl
+sudo apt install -y curl
+
 # Install Rust
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
 
@@ -32,7 +35,7 @@ sudo add-apt-repository ppa:neovim-ppa/unstable
 sudo apt update
 
 # Install Neovim
-sudo apt install -y neovim
+sudo apt install -y neovim=0.X.X
 
 # Install Neovim dependencies
 sudo apt install -y python3 python3-pip
@@ -113,6 +116,15 @@ vim.cmd([[packadd packer.nvim]])
 require("packer").startup(function()
   -- Packer can manage itself
   use("wbthomason/packer.nvim")
+
+  -- startup customization
+  use {
+  "startup-nvim/startup.nvim",
+    requires = {"nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim"},
+    config = function()
+      require"startup".setup()
+    end
+  }
 
   -- Telescope for fuzzy finding
   use("nvim-telescope/telescope.nvim")

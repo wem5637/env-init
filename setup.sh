@@ -9,6 +9,13 @@ error_exit() {
     exit 1
 }
 
+fix_broken_packages() {
+    echo "Checking and fixing broken packages..."
+    sudo dpkg --configure -a || { echo "Failed to reconfigure packages. Manual intervention required."; return 1; }
+    sudo apt --fix-broken install -y || { echo "Failed to fix broken packages. Manual intervention required."; return 1; }
+    echo "Broken packages resolved successfully."
+}
+
 # Function to install essential tools
 install_essentials() {
     echo "Installing essential tools..."
@@ -135,6 +142,7 @@ EOF
 
 # Main script execution
 main() {
+    fix_broken_packages
     install_essentials
     setup_rust
     setup_ruby_rails

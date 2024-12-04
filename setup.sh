@@ -16,24 +16,43 @@ fix_broken_packages() {
     echo "Broken packages resolved successfully."
 }
 
+install_rust() {
+    # Use Expect to automate Rust installation
+    /usr/bin/expect -f <<EOF
+set timeout -1
+
+# Spawn Rustup installation script
+spawn sh -c "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh"
+
+# Expect and respond to the "Proceed with installation" prompt
+expect {
+    "Proceed with installation*" {
+        send "1\r"
+        exp_continue
+    }
+    eof
+}
+
+# Handle any additional prompts
+expect {
+    "Enter your choice*" {
+        send "\r"
+        exp_continue
+    }
+    eof
+}
+
+# Wait for completion
+expect eof
+EOF
+}
+
 # Function to install essential tools
 install_essentials() {
     echo "Installing essential tools..."
     sudo apt update || error_exit "Failed to update package list."
     sudo apt install -y build-essential git python3 python3-pip curl || error_exit "Failed to install essential tools."
     pip3 install --user virtualenv || error_exit "Failed to install virtualenv."
-}
-
-# Function to set up Rust
-setup_rust() {
-    echo "Setting up Rust..."
-    if [[ -f ./rustup.exp ]]; then
-        chmod +x ./rustup.exp
-        ./rustup.exp || error_exit "Rust installation failed."
-        source "$HOME/.cargo/env"
-    else
-        echo "rustup.exp file not found. Skipping Rust setup."
-    fi
 }
 
 # Function to set up Ruby and Rails
@@ -144,7 +163,7 @@ EOF
 main() {
     fix_broken_packages
     install_essentials
-    setup_rust
+    install_rust
     setup_ruby_rails
     setup_neovim
     setup_alacritty

@@ -17,6 +17,12 @@ fix_broken_packages() {
 }
 
 install_rust() {
+    # Install expect if not already installed
+    if ! command -v expect &> /dev/null; then
+        echo "Expect not found, installing..."
+        sudo apt install -y expect
+    fi
+
     # Use Expect to automate Rust installation
     /usr/bin/expect -f <<EOF
 set timeout -1

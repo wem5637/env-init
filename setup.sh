@@ -17,40 +17,15 @@ fix_broken_packages() {
 }
 
 install_rust() {
-    # Install expect if not already installed
-    if ! command -v expect &> /dev/null; then
-        echo "Expect not found, installing..."
-        sudo apt install -y expect
-    fi
+    echo "Installing Rust..."
 
-    # Use Expect to automate Rust installation
-    /usr/bin/expect -f <<EOF
-set timeout -1
+    # Download and run rustup installation script
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y
 
-# Spawn Rustup installation script
-spawn sh -c "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh"
+    # Source the rust environment to make it available immediately
+    source "$HOME/.cargo/env"
 
-# Expect and respond to the "Proceed with installation" prompt
-expect {
-    "Proceed with installation*" {
-        send "1\r"
-        exp_continue
-    }
-    eof
-}
-
-# Handle any additional prompts
-expect {
-    "Enter your choice*" {
-        send "\r"
-        exp_continue
-    }
-    eof
-}
-
-# Wait for completion
-expect eof
-EOF
+    echo "Rust installation completed!"
 }
 
 # Function to install essential tools

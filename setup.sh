@@ -94,14 +94,36 @@ EOF
 
 # Function to set up Alacritty
 setup_alacritty() {
+    # Check if Alacritty is already installed
+    if command -v alacritty &> /dev/null; then
+        echo "Alacritty is already installed."
+        return 0  # Exit the function early
+    fi
+
     echo "Setting up Alacritty..."
+
+    # Install required dependencies
     sudo apt install -y cmake pkg-config libfreetype6-dev libfontconfig1-dev libxcb-xfixes0-dev libxkbcommon-dev || error_exit "Failed to install Alacritty dependencies."
+    
+    # Clone Alacritty repository
     git clone https://github.com/alacritty/alacritty.git || error_exit "Failed to clone Alacritty repository."
+    
+    # Enter Alacritty directory
     pushd alacritty || error_exit "Failed to enter Alacritty directory."
+    
+    # Build Alacritty
     cargo build --release || error_exit "Failed to build Alacritty."
+    
+    # Copy Alacritty binary to /usr/local/bin
     sudo cp target/release/alacritty /usr/local/bin || error_exit "Failed to copy Alacritty binary."
+    
+    # Return to previous directory
     popd
+    
+    # Clean up Alacritty repository
     rm -rf alacritty || echo "Warning: Failed to clean up Alacritty repository."
+
+    echo "Alacritty installation completed!"
 }
 
 # Function to set up Python virtual environment for ML
